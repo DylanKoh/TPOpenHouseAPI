@@ -14,10 +14,16 @@ namespace TPOpenHouseAPI.Controllers
     {
         private TPOpenHouseEntities db = new TPOpenHouseEntities();
 
-        // GET: Users
+        public UsersController()
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+        }
+
+        // POST: Users
+        [HttpPost]
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return Json(db.Users.ToList());
         }
 
         // GET: Users/Details/5
@@ -35,84 +41,28 @@ namespace TPOpenHouseAPI.Controllers
             return View(user);
         }
 
-        // GET: Users/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "userID,userName,password,Points")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var findUser = db.Users.Where(x => x.userID == user.userID).Select(x => x).FirstOrDefault();
+                if (findUser != null)
+                {
+                    return Json("User ID has been used!");
+                }
+                else
+                {
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    return Json("User created successfully!");
+                }
+                
             }
+            return Json("Unable to create user account! Please contact our administrator!");
 
-            return View(user);
-        }
-
-        // GET: Users/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "userID,userName,password,Points")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(user);
-        }
-
-        // GET: Users/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
