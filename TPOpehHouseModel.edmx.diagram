@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6621a0ecac874f2b90485d17aed8de25" Name="Diagram1">
+        <EntityTypeShape EntityType="TPOpenHouseModel.Point" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOpenHouseModel.Question" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOpenHouseModel.Reward" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOpenHouseModel.sysdiagram" Width="1.5" PointX="5.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOpenHouseModel.UserClaim" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOpenHouseModel.UserResponse" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOpenHouseModel.User" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="TPOpenHouseModel.FK_Points_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOpenHouseModel.FK_UserResponse_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOpenHouseModel.FK_UserClaim_Rewards" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOpenHouseModel.FK_UserClaim_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOpenHouseModel.FK_UserResponse_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
