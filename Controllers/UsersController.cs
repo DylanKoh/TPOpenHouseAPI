@@ -26,22 +26,6 @@ namespace TPOpenHouseAPI.Controllers
             return Json(db.Users.ToList());
         }
 
-        // GET: Users/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-
         // POST: Users/Create
         [HttpPost]
         public ActionResult Create([Bind(Include = "userID,userName,password,Points")] User user)
@@ -59,10 +43,32 @@ namespace TPOpenHouseAPI.Controllers
                     db.SaveChanges();
                     return Json("User created successfully!");
                 }
-                
+
             }
             return Json("Unable to create user account! Please contact our administrator!");
 
+        }
+
+        // POST: Users/Login?userID={}&password={}
+        [HttpPost]
+        public ActionResult Login(string userID, string password)
+        {
+            var getUser = db.Users.Where(x => x.userID == userID).Select(x => x).FirstOrDefault();
+            if (getUser == null)
+            {
+                return Json("User account does not exist!");
+            }
+            else
+            {
+                if (getUser.password != password)
+                {
+                    return Json("Password is incorrect! Please try again!");
+                }
+                else
+                {
+                    return Json(getUser);
+                }
+            }
         }
 
         protected override void Dispose(bool disposing)

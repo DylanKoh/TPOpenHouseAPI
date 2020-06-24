@@ -27,7 +27,6 @@ namespace TPOpenHouseAPI
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Point> Points { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Reward> Rewards { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
