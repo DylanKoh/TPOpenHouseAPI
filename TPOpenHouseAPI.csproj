@@ -135,43 +135,43 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs">
-      <DependentUpon>TPOpehHouseModel.tt</DependentUpon>
+      <DependentUpon>TPOpenHouseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Reward.cs">
-      <DependentUpon>TPOpehHouseModel.tt</DependentUpon>
+      <DependentUpon>TPOpenHouseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>TPOpehHouseModel.tt</DependentUpon>
+      <DependentUpon>TPOpenHouseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>TPOpehHouseModel.tt</DependentUpon>
+      <DependentUpon>TPOpenHouseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>TPOpehHouseModel.tt</DependentUpon>
+      <DependentUpon>TPOpenHouseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TPOpehHouseModel.Context.cs">
+    <Compile Include="TPOpenHouseModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TPOpehHouseModel.Context.tt</DependentUpon>
+      <DependentUpon>TPOpenHouseModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="TPOpehHouseModel.cs">
+    <Compile Include="TPOpenHouseModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TPOpehHouseModel.tt</DependentUpon>
+      <DependentUpon>TPOpenHouseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TPOpehHouseModel.Designer.cs">
+    <Compile Include="TPOpenHouseModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TPOpehHouseModel.edmx</DependentUpon>
+      <DependentUpon>TPOpenHouseModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>TPOpehHouseModel.tt</DependentUpon>
+      <DependentUpon>TPOpenHouseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserClaim.cs">
-      <DependentUpon>TPOpehHouseModel.tt</DependentUpon>
+      <DependentUpon>TPOpenHouseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserResponse.cs">
-      <DependentUpon>TPOpehHouseModel.tt</DependentUpon>
+      <DependentUpon>TPOpenHouseModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -196,15 +196,15 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="TPOpehHouseModel.Context.tt">
+    <Content Include="TPOpenHouseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TPOpehHouseModel.Context.cs</LastGenOutput>
-      <DependentUpon>TPOpehHouseModel.edmx</DependentUpon>
+      <DependentUpon>TPOpenHouseModel.edmx</DependentUpon>
+      <LastGenOutput>TPOpenHouseModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="TPOpehHouseModel.tt">
+    <Content Include="TPOpenHouseModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TPOpehHouseModel.edmx</DependentUpon>
-      <LastGenOutput>TPOpehHouseModel.cs</LastGenOutput>
+      <DependentUpon>TPOpenHouseModel.edmx</DependentUpon>
+      <LastGenOutput>TPOpenHouseModel.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -220,12 +220,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <EntityDeploy Include="TPOpehHouseModel.edmx">
+    <EntityDeploy Include="TPOpenHouseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TPOpehHouseModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>TPOpenHouseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="TPOpehHouseModel.edmx.diagram">
-      <DependentUpon>TPOpehHouseModel.edmx</DependentUpon>
+    <Content Include="TPOpenHouseModel.edmx.diagram">
+      <DependentUpon>TPOpenHouseModel.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>
