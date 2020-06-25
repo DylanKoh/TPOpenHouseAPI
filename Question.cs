@@ -21,13 +21,13 @@ namespace TPOpenHouseAPI
         }
     
         public int ID { get; set; }
-        public string QuestionCategory { get; set; }
-        public string QuestionString { get; set; }
         public string AnswerOne { get; set; }
         public string AnswerTwo { get; set; }
         public string AnswerThree { get; set; }
         public string AnswerFour { get; set; }
         public string Correct { get; set; }
+        public string questionCategory { get; set; }
+        public string questionString { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserResponse> UserResponses { get; set; }

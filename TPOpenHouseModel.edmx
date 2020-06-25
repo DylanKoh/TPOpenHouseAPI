@@ -10,22 +10,21 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="QuestionCategory" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="QuestionString" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="AnswerOne" Type="varchar(max)" Nullable="false" />
           <Property Name="AnswerTwo" Type="varchar(max)" Nullable="false" />
           <Property Name="AnswerThree" Type="varchar(max)" Nullable="false" />
           <Property Name="AnswerFour" Type="varchar(max)" Nullable="false" />
           <Property Name="Correct" Type="varchar(max)" Nullable="false" />
+          <Property Name="questionCategory" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="questionString" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Rewards">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RewardName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PointsRequired" Type="int" Nullable="false" />
-          <Property Name="RewardCode" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="rewardName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pointsRequired" Type="int" Nullable="false" />
           <Property Name="isClaimed" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -44,7 +43,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="userIDFK" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="rewardsIDFK" Type="int" Nullable="false" />
+          <Property Name="rewardsIDFK" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="UserResponse">
           <Key>
@@ -63,7 +62,7 @@
           <Property Name="userID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="userName" Type="varchar(max)" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Points" Type="int" Nullable="false" />
+          <Property Name="points" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_UserClaim_Rewards">
           <End Role="Rewards" Type="Self.Rewards" Multiplicity="1" />
@@ -178,23 +177,22 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="QuestionCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="QuestionString" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AnswerOne" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AnswerTwo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AnswerThree" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AnswerFour" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Correct" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="questionCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="questionString" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="UserResponses" Relationship="Self.FK_UserResponse_Questions" FromRole="Questions" ToRole="UserResponse" />
         </EntityType>
         <EntityType Name="Reward">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RewardName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PointsRequired" Type="Int32" Nullable="false" />
-          <Property Name="RewardCode" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="rewardName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pointsRequired" Type="Int32" Nullable="false" />
           <Property Name="isClaimed" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="UserClaims" Relationship="Self.FK_UserClaim_Rewards" FromRole="Rewards" ToRole="UserClaim" />
         </EntityType>
@@ -214,7 +212,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userIDFK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="rewardsIDFK" Type="Int32" Nullable="false" />
+          <Property Name="rewardsIDFK" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Reward" Relationship="Self.FK_UserClaim_Rewards" FromRole="UserClaim" ToRole="Rewards" />
           <NavigationProperty Name="User" Relationship="Self.FK_UserClaim_Users" FromRole="UserClaim" ToRole="Users" />
         </EntityType>
@@ -237,7 +235,7 @@
           <Property Name="userID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="userName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Points" Type="Int32" Nullable="false" />
+          <Property Name="points" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserClaims" Relationship="Self.FK_UserClaim_Users" FromRole="Users" ToRole="UserClaim" />
           <NavigationProperty Name="UserResponses" Relationship="Self.FK_UserResponse_Users" FromRole="Users" ToRole="UserResponse" />
         </EntityType>
@@ -364,13 +362,13 @@
             <EntityTypeMapping TypeName="TPOpenHouseModel.Question">
               <MappingFragment StoreEntitySet="Questions">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="QuestionCategory" ColumnName="QuestionCategory" />
-                <ScalarProperty Name="QuestionString" ColumnName="QuestionString" />
                 <ScalarProperty Name="AnswerOne" ColumnName="AnswerOne" />
                 <ScalarProperty Name="AnswerTwo" ColumnName="AnswerTwo" />
                 <ScalarProperty Name="AnswerThree" ColumnName="AnswerThree" />
                 <ScalarProperty Name="AnswerFour" ColumnName="AnswerFour" />
                 <ScalarProperty Name="Correct" ColumnName="Correct" />
+                <ScalarProperty Name="questionCategory" ColumnName="questionCategory" />
+                <ScalarProperty Name="questionString" ColumnName="questionString" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -378,9 +376,8 @@
             <EntityTypeMapping TypeName="TPOpenHouseModel.Reward">
               <MappingFragment StoreEntitySet="Rewards">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="RewardName" ColumnName="RewardName" />
-                <ScalarProperty Name="PointsRequired" ColumnName="PointsRequired" />
-                <ScalarProperty Name="RewardCode" ColumnName="RewardCode" />
+                <ScalarProperty Name="rewardName" ColumnName="rewardName" />
+                <ScalarProperty Name="pointsRequired" ColumnName="pointsRequired" />
                 <ScalarProperty Name="isClaimed" ColumnName="isClaimed" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -422,7 +419,7 @@
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="userName" ColumnName="userName" />
                 <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="points" ColumnName="points" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

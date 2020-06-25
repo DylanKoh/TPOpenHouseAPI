@@ -20,10 +20,9 @@ namespace TPOpenHouseAPI
             this.UserClaims = new HashSet<UserClaim>();
         }
     
-        public int ID { get; set; }
-        public string RewardName { get; set; }
-        public int PointsRequired { get; set; }
-        public byte[] RewardCode { get; set; }
+        public System.Guid ID { get; set; }
+        public string rewardName { get; set; }
+        public int pointsRequired { get; set; }
         public bool isClaimed { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
