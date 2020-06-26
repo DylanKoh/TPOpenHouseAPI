@@ -15,6 +15,7 @@
         <AssociationConnector Association="TPOpenHouseModel.FK_UserClaim_Rewards" ManuallyRouted="false" />
         <AssociationConnector Association="TPOpenHouseModel.FK_UserClaim_Users" ManuallyRouted="false" />
         <AssociationConnector Association="TPOpenHouseModel.FK_UserResponse_Users" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TPOpenHouseModel.Event" Width="1.5" PointX="5.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
