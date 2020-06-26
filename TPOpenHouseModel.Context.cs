@@ -27,13 +27,13 @@ namespace TPOpenHouseAPI
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Reward> Rewards { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UserClaim> UserClaims { get; set; }
         public virtual DbSet<UserResponse> UserResponses { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Event> Events { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

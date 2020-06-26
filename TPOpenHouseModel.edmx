@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TPOpenHouseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TPOpenHouseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Events">
           <Key>
             <PropertyRef Name="ID" />
@@ -12,7 +12,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="eventName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="eventVenue" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="eventTime" Type="datetime" Nullable="false" />
+          <Property Name="eventTime" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="Questions">
           <Key>
@@ -177,10 +177,20 @@
             <End Role="UserResponse" EntitySet="UserResponse" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TPOpenHouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="eventName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="eventVenue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="eventTime" Type="DateTime" Nullable="false" Precision="7" />
+        </EntityType>
         <EntityType Name="Question">
           <Key>
             <PropertyRef Name="ID" />
@@ -297,6 +307,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="TPOpenHouseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Events" EntityType="Self.Event" />
           <EntitySet Name="Questions" EntityType="Self.Question" />
           <EntitySet Name="Rewards" EntityType="Self.Reward" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
@@ -349,7 +360,6 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <EntitySet Name="Events" EntityType="TPOpenHouseModel.Event" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -362,21 +372,22 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <EntityType Name="Event">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="eventName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="eventVenue" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="eventTime" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TPOpenHouseModelStoreContainer" CdmEntityContainer="TPOpenHouseEntities">
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="TPOpenHouseModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="eventName" ColumnName="eventName" />
+                <ScalarProperty Name="eventVenue" ColumnName="eventVenue" />
+                <ScalarProperty Name="eventTime" ColumnName="eventTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Questions">
             <EntityTypeMapping TypeName="TPOpenHouseModel.Question">
               <MappingFragment StoreEntitySet="Questions">
@@ -466,16 +477,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="TPOpenHouseModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="TPOpenHouseModel.Store.sp_upgraddiagrams" />
-          <EntitySetMapping Name="Events">
-            <EntityTypeMapping TypeName="TPOpenHouseModel.Event">
-              <MappingFragment StoreEntitySet="Events">
-                <ScalarProperty Name="eventTime" ColumnName="eventTime" />
-                <ScalarProperty Name="eventVenue" ColumnName="eventVenue" />
-                <ScalarProperty Name="eventName" ColumnName="eventName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
