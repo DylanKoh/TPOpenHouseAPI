@@ -17,6 +17,7 @@ namespace TPOpenHouseAPI
         public int ID { get; set; }
         public string userIDFK { get; set; }
         public System.Guid rewardsIDFK { get; set; }
+        public bool isClaimed { get; set; }
     
         public virtual Reward Reward { get; set; }
         public virtual User User { get; set; }

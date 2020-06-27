@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TPOpenHouseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TPOpenHouseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Events">
           <Key>
             <PropertyRef Name="ID" />
@@ -34,7 +34,6 @@
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="rewardName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pointsRequired" Type="int" Nullable="false" />
-          <Property Name="isClaimed" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -53,6 +52,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="userIDFK" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="rewardsIDFK" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="isClaimed" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UserResponse">
           <Key>
@@ -177,159 +177,11 @@
             <End Role="UserResponse" EntitySet="UserResponse" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TPOpenHouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Event">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="eventName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="eventVenue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="eventTime" Type="DateTime" Nullable="false" Precision="7" />
-        </EntityType>
-        <EntityType Name="Question">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AnswerOne" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="AnswerTwo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="AnswerThree" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="AnswerFour" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Correct" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="questionCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="questionString" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="UserResponses" Relationship="Self.FK_UserResponse_Questions" FromRole="Questions" ToRole="UserResponse" />
-        </EntityType>
-        <EntityType Name="Reward">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="rewardName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="pointsRequired" Type="Int32" Nullable="false" />
-          <Property Name="isClaimed" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="UserClaims" Relationship="Self.FK_UserClaim_Rewards" FromRole="Rewards" ToRole="UserClaim" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="UserClaim">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userIDFK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="rewardsIDFK" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Reward" Relationship="Self.FK_UserClaim_Rewards" FromRole="UserClaim" ToRole="Rewards" />
-          <NavigationProperty Name="User" Relationship="Self.FK_UserClaim_Users" FromRole="UserClaim" ToRole="Users" />
-        </EntityType>
-        <EntityType Name="UserResponse">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userIDFK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="questionIDFK" Type="Int32" Nullable="false" />
-          <Property Name="userAnswer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="isCorrect" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Question" Relationship="Self.FK_UserResponse_Questions" FromRole="UserResponse" ToRole="Questions" />
-          <NavigationProperty Name="User" Relationship="Self.FK_UserResponse_Users" FromRole="UserResponse" ToRole="Users" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="userID" />
-          </Key>
-          <Property Name="userID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="userName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="points" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UserClaims" Relationship="Self.FK_UserClaim_Users" FromRole="Users" ToRole="UserClaim" />
-          <NavigationProperty Name="UserResponses" Relationship="Self.FK_UserResponse_Users" FromRole="Users" ToRole="UserResponse" />
-        </EntityType>
-        <Association Name="FK_UserResponse_Questions">
-          <End Role="Questions" Type="Self.Question" Multiplicity="1" />
-          <End Role="UserResponse" Type="Self.UserResponse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserResponse">
-              <PropertyRef Name="questionIDFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserClaim_Rewards">
-          <End Role="Rewards" Type="Self.Reward" Multiplicity="1" />
-          <End Role="UserClaim" Type="Self.UserClaim" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rewards">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserClaim">
-              <PropertyRef Name="rewardsIDFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserClaim_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="UserClaim" Type="Self.UserClaim" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="userID" />
-            </Principal>
-            <Dependent Role="UserClaim">
-              <PropertyRef Name="userIDFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserResponse_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="UserResponse" Type="Self.UserResponse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="userID" />
-            </Principal>
-            <Dependent Role="UserResponse">
-              <PropertyRef Name="userIDFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="TPOpenHouseEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Events" EntityType="Self.Event" />
-          <EntitySet Name="Questions" EntityType="Self.Question" />
-          <EntitySet Name="Rewards" EntityType="Self.Reward" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="UserClaims" EntityType="Self.UserClaim" />
-          <EntitySet Name="UserResponses" EntityType="Self.UserResponse" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK_UserResponse_Questions" Association="Self.FK_UserResponse_Questions">
-            <End Role="Questions" EntitySet="Questions" />
-            <End Role="UserResponse" EntitySet="UserResponses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserClaim_Rewards" Association="Self.FK_UserClaim_Rewards">
-            <End Role="Rewards" EntitySet="Rewards" />
-            <End Role="UserClaim" EntitySet="UserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserClaim_Users" Association="Self.FK_UserClaim_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="UserClaim" EntitySet="UserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserResponse_Users" Association="Self.FK_UserResponse_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="UserResponse" EntitySet="UserResponses" />
-          </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -360,6 +212,29 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Events" EntityType="TPOpenHouseModel.Event" />
+          <EntitySet Name="Questions" EntityType="TPOpenHouseModel.Question" />
+          <EntitySet Name="Rewards" EntityType="TPOpenHouseModel.Reward" />
+          <EntitySet Name="sysdiagrams" EntityType="TPOpenHouseModel.sysdiagram" />
+          <EntitySet Name="UserClaims" EntityType="TPOpenHouseModel.UserClaim" />
+          <EntitySet Name="UserResponses" EntityType="TPOpenHouseModel.UserResponse" />
+          <EntitySet Name="Users" EntityType="TPOpenHouseModel.User" />
+          <AssociationSet Name="FK_UserResponse_Questions" Association="TPOpenHouseModel.FK_UserResponse_Questions">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="UserResponse" EntitySet="UserResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClaim_Rewards" Association="TPOpenHouseModel.FK_UserClaim_Rewards">
+            <End Role="Reward" EntitySet="Rewards" />
+            <End Role="UserClaim" EntitySet="UserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClaim_Users" Association="TPOpenHouseModel.FK_UserClaim_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserClaim" EntitySet="UserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserResponse_Users" Association="TPOpenHouseModel.FK_UserResponse_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserResponse" EntitySet="UserResponses" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -372,87 +247,136 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="eventName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="eventVenue" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="eventTime" Type="DateTime" Nullable="false" Precision="7" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnswerOne" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AnswerTwo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AnswerThree" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AnswerFour" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Correct" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="questionCategory" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="questionString" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserResponses" Relationship="TPOpenHouseModel.FK_UserResponse_Questions" FromRole="Question" ToRole="UserResponse" />
+        </EntityType>
+        <EntityType Name="Reward">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="rewardName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pointsRequired" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserClaims" Relationship="TPOpenHouseModel.FK_UserClaim_Rewards" FromRole="Reward" ToRole="UserClaim" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserClaim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userIDFK" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rewardsIDFK" Type="Guid" Nullable="false" />
+          <Property Name="isClaimed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Reward" Relationship="TPOpenHouseModel.FK_UserClaim_Rewards" FromRole="UserClaim" ToRole="Reward" />
+          <NavigationProperty Name="User" Relationship="TPOpenHouseModel.FK_UserClaim_Users" FromRole="UserClaim" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserResponse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userIDFK" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="questionIDFK" Type="Int32" Nullable="false" />
+          <Property Name="userAnswer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="isCorrect" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="TPOpenHouseModel.FK_UserResponse_Questions" FromRole="UserResponse" ToRole="Question" />
+          <NavigationProperty Name="User" Relationship="TPOpenHouseModel.FK_UserResponse_Users" FromRole="UserResponse" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="points" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserClaims" Relationship="TPOpenHouseModel.FK_UserClaim_Users" FromRole="User" ToRole="UserClaim" />
+          <NavigationProperty Name="UserResponses" Relationship="TPOpenHouseModel.FK_UserResponse_Users" FromRole="User" ToRole="UserResponse" />
+        </EntityType>
+        <Association Name="FK_UserResponse_Questions">
+          <End Type="TPOpenHouseModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="TPOpenHouseModel.UserResponse" Role="UserResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserResponse">
+              <PropertyRef Name="questionIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClaim_Rewards">
+          <End Type="TPOpenHouseModel.Reward" Role="Reward" Multiplicity="1" />
+          <End Type="TPOpenHouseModel.UserClaim" Role="UserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reward">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserClaim">
+              <PropertyRef Name="rewardsIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClaim_Users">
+          <End Type="TPOpenHouseModel.User" Role="User" Multiplicity="1" />
+          <End Type="TPOpenHouseModel.UserClaim" Role="UserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="UserClaim">
+              <PropertyRef Name="userIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserResponse_Users">
+          <End Type="TPOpenHouseModel.User" Role="User" Multiplicity="1" />
+          <End Type="TPOpenHouseModel.UserResponse" Role="UserResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="UserResponse">
+              <PropertyRef Name="userIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TPOpenHouseModelStoreContainer" CdmEntityContainer="TPOpenHouseEntities">
-          <EntitySetMapping Name="Events">
-            <EntityTypeMapping TypeName="TPOpenHouseModel.Event">
-              <MappingFragment StoreEntitySet="Events">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="eventName" ColumnName="eventName" />
-                <ScalarProperty Name="eventVenue" ColumnName="eventVenue" />
-                <ScalarProperty Name="eventTime" ColumnName="eventTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Questions">
-            <EntityTypeMapping TypeName="TPOpenHouseModel.Question">
-              <MappingFragment StoreEntitySet="Questions">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="AnswerOne" ColumnName="AnswerOne" />
-                <ScalarProperty Name="AnswerTwo" ColumnName="AnswerTwo" />
-                <ScalarProperty Name="AnswerThree" ColumnName="AnswerThree" />
-                <ScalarProperty Name="AnswerFour" ColumnName="AnswerFour" />
-                <ScalarProperty Name="Correct" ColumnName="Correct" />
-                <ScalarProperty Name="questionCategory" ColumnName="questionCategory" />
-                <ScalarProperty Name="questionString" ColumnName="questionString" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Rewards">
-            <EntityTypeMapping TypeName="TPOpenHouseModel.Reward">
-              <MappingFragment StoreEntitySet="Rewards">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="rewardName" ColumnName="rewardName" />
-                <ScalarProperty Name="pointsRequired" ColumnName="pointsRequired" />
-                <ScalarProperty Name="isClaimed" ColumnName="isClaimed" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="TPOpenHouseModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserClaims">
-            <EntityTypeMapping TypeName="TPOpenHouseModel.UserClaim">
-              <MappingFragment StoreEntitySet="UserClaim">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="userIDFK" ColumnName="userIDFK" />
-                <ScalarProperty Name="rewardsIDFK" ColumnName="rewardsIDFK" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserResponses">
-            <EntityTypeMapping TypeName="TPOpenHouseModel.UserResponse">
-              <MappingFragment StoreEntitySet="UserResponse">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="userIDFK" ColumnName="userIDFK" />
-                <ScalarProperty Name="questionIDFK" ColumnName="questionIDFK" />
-                <ScalarProperty Name="userAnswer" ColumnName="userAnswer" />
-                <ScalarProperty Name="isCorrect" ColumnName="isCorrect" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="TPOpenHouseModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="userID" ColumnName="userID" />
-                <ScalarProperty Name="userName" ColumnName="userName" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="points" ColumnName="points" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="TPOpenHouseModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="TPOpenHouseModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="TPOpenHouseModel.Store.sp_dropdiagram" />
@@ -477,6 +401,81 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="TPOpenHouseModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="TPOpenHouseModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="TPOpenHouseModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="eventTime" ColumnName="eventTime" />
+                <ScalarProperty Name="eventVenue" ColumnName="eventVenue" />
+                <ScalarProperty Name="eventName" ColumnName="eventName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="TPOpenHouseModel.Question">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="questionString" ColumnName="questionString" />
+                <ScalarProperty Name="questionCategory" ColumnName="questionCategory" />
+                <ScalarProperty Name="Correct" ColumnName="Correct" />
+                <ScalarProperty Name="AnswerFour" ColumnName="AnswerFour" />
+                <ScalarProperty Name="AnswerThree" ColumnName="AnswerThree" />
+                <ScalarProperty Name="AnswerTwo" ColumnName="AnswerTwo" />
+                <ScalarProperty Name="AnswerOne" ColumnName="AnswerOne" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rewards">
+            <EntityTypeMapping TypeName="TPOpenHouseModel.Reward">
+              <MappingFragment StoreEntitySet="Rewards">
+                <ScalarProperty Name="pointsRequired" ColumnName="pointsRequired" />
+                <ScalarProperty Name="rewardName" ColumnName="rewardName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TPOpenHouseModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserClaims">
+            <EntityTypeMapping TypeName="TPOpenHouseModel.UserClaim">
+              <MappingFragment StoreEntitySet="UserClaim">
+                <ScalarProperty Name="isClaimed" ColumnName="isClaimed" />
+                <ScalarProperty Name="rewardsIDFK" ColumnName="rewardsIDFK" />
+                <ScalarProperty Name="userIDFK" ColumnName="userIDFK" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserResponses">
+            <EntityTypeMapping TypeName="TPOpenHouseModel.UserResponse">
+              <MappingFragment StoreEntitySet="UserResponse">
+                <ScalarProperty Name="isCorrect" ColumnName="isCorrect" />
+                <ScalarProperty Name="userAnswer" ColumnName="userAnswer" />
+                <ScalarProperty Name="questionIDFK" ColumnName="questionIDFK" />
+                <ScalarProperty Name="userIDFK" ColumnName="userIDFK" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TPOpenHouseModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
