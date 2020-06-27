@@ -23,6 +23,7 @@ namespace TPOpenHouseAPI
         public System.Guid ID { get; set; }
         public string rewardName { get; set; }
         public int pointsRequired { get; set; }
+        public Nullable<bool> linkedToUser { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserClaim> UserClaims { get; set; }

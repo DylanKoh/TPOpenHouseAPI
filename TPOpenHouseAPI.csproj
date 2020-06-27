@@ -134,6 +134,8 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
+    <Compile Include="Controllers\RewardsController.cs" />
+    <Compile Include="Controllers\UserClaimsController.cs" />
     <Compile Include="Controllers\UserResponsesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Event.cs">
@@ -327,6 +329,11 @@
     <Content Include="Scripts\umd\popper.js.flow" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
     <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
     <EntityDeploy Include="TPOpenHouseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TPOpenHouseModel.Designer.cs</LastGenOutput>
@@ -334,17 +341,14 @@
     <Content Include="TPOpenHouseModel.edmx.diagram">
       <DependentUpon>TPOpenHouseModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Scripts\README.md" />
-    <Content Include="Scripts\popper.min.js.map" />
-    <Content Include="Scripts\popper.js.map" />
-    <Content Include="Scripts\popper-utils.min.js.map" />
-    <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Events\" />
     <Folder Include="Views\Questions\" />
+    <Folder Include="Views\Rewards\" />
+    <Folder Include="Views\UserClaims\" />
     <Folder Include="Views\UserResponses\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>

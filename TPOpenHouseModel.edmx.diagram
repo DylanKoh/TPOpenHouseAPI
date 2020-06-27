@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f3792ddcc15845288c16414dc54c00ae" Name="Diagram1">
-        <EntityTypeShape EntityType="TPOpenHouseModel.Event" Width="1.5" PointX="5.75" PointY="2" />
-        <EntityTypeShape EntityType="TPOpenHouseModel.Question" Width="1.5" PointX="0.75" PointY="7.375" />
-        <EntityTypeShape EntityType="TPOpenHouseModel.Reward" Width="1.5" PointX="0.75" PointY="1" />
-        <EntityTypeShape EntityType="TPOpenHouseModel.sysdiagram" Width="1.5" PointX="2.75" PointY="7" />
-        <EntityTypeShape EntityType="TPOpenHouseModel.UserClaim" Width="1.5" PointX="3" PointY="3.875" />
-        <EntityTypeShape EntityType="TPOpenHouseModel.UserResponse" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="TPOpenHouseModel.User" Width="1.5" PointX="0.75" PointY="3.875" />
-        <AssociationConnector Association="TPOpenHouseModel.FK_UserResponse_Questions" />
-        <AssociationConnector Association="TPOpenHouseModel.FK_UserClaim_Rewards" />
-        <AssociationConnector Association="TPOpenHouseModel.FK_UserClaim_Users" />
-        <AssociationConnector Association="TPOpenHouseModel.FK_UserResponse_Users" />
+      <Diagram DiagramId="5f210f0078eb4873b5a97aa68ae3b000" Name="Diagram1">
+        <EntityTypeShape EntityType="TPOpenHouseModel.Event" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOpenHouseModel.Question" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOpenHouseModel.Reward" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOpenHouseModel.sysdiagram" Width="1.5" PointX="2.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOpenHouseModel.UserClaim" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOpenHouseModel.UserResponse" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOpenHouseModel.User" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="TPOpenHouseModel.FK_UserResponse_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOpenHouseModel.FK_UserClaim_Rewards" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOpenHouseModel.FK_UserClaim_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOpenHouseModel.FK_UserResponse_Users" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
