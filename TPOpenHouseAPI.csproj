@@ -134,6 +134,7 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
+    <Compile Include="Controllers\UserResponsesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Event.cs">
       <DependentUpon>TPOpenHouseModel.tt</DependentUpon>
@@ -344,6 +345,7 @@
     <Folder Include="Models\" />
     <Folder Include="Views\Events\" />
     <Folder Include="Views\Questions\" />
+    <Folder Include="Views\UserResponses\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>

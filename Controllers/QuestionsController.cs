@@ -41,7 +41,25 @@ namespace TPOpenHouseAPI.Controllers
             }
             return Json(question);
         }
+        
+        // POST: Questions/CheckCategory?userID={}
+        [HttpPost]        
+        public ActionResult CheckCategory(string userID)
+        {
+            var checkResponse = (from x in db.UserResponses
+                                 where x.userIDFK == userID
+                                 join y in db.Questions on x.questionIDFK equals y.ID
+                                 select y.questionCategory).Distinct();
+            return Json(checkResponse.ToList());
+        }
 
+        // POST: Questions/GetCategoryQuestions?category={}
+        [HttpPost]
+        public ActionResult GetCategoryQuestions(string category)
+        {
+            var getCategoryQuestions = db.Questions.Where(x => x.questionCategory == category).Select(x => x);
+            return Json(getCategoryQuestions.ToList());
+        }
 
         // POST: Questions/Create
         [HttpPost]

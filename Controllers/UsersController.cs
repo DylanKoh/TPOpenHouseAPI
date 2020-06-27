@@ -26,6 +26,19 @@ namespace TPOpenHouseAPI.Controllers
             return Json(db.Users.ToList());
         }
 
+        public ActionResult GetSpecificUser(string userID)
+        {
+            var specificUser = db.Users.Where(x => x.userID == userID).Select(x => x).FirstOrDefault();
+            if (specificUser == null)
+            {
+                return Json("Unable to find user!");
+            }
+            else
+            {
+                return Json(specificUser);
+            }
+        }
+
         // POST: Users/Create
         [HttpPost]
         public ActionResult Create([Bind(Include = "userID,userName,password,Points")] User user)

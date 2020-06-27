@@ -23,7 +23,7 @@ namespace TPOpenHouseAPI.Controllers
         [HttpPost]
         public ActionResult Index()
         {
-            return Json(db.Events.ToList());
+            return Json(db.Events.OrderBy(x => x.eventTime).ToList());
         }
 
         // POST: Events/Create
