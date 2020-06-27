@@ -42,6 +42,22 @@ namespace TPOpenHouseAPI.Controllers
             return Json(RewardClaim);
         }
 
+        // POST: UserClaims/CheckRedemptionStatus?rewardID={}
+        [HttpPost]
+        public ActionResult CheckRedemptionStatus(Guid rewardID)
+        {
+            var checkStatus = db.UserClaims.Where(x => x.rewardsIDFK == rewardID).Select(x => x.isClaimed).FirstOrDefault();
+            if (checkStatus)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
+                
+        }
+
         // POST: UserClaims/Edit/5
         [HttpPost]
         public ActionResult Edit([Bind(Include = "ID,userIDFK,rewardsIDFK,isClaimed")] UserClaim userClaim)
