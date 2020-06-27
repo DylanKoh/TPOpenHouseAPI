@@ -34,6 +34,14 @@ namespace TPOpenHouseAPI.Controllers
             return Json("Unable to make claim!");
         }
 
+        // POST: UserClaims/GetClaim?rewardID={}
+        [HttpPost]
+        public ActionResult GetClaim(Guid rewardID)
+        {
+            var RewardClaim = db.UserClaims.Where(x => x.rewardsIDFK == rewardID).Select(x => x).FirstOrDefault();
+            return Json(RewardClaim);
+        }
+
         // POST: UserClaims/Edit/5
         [HttpPost]
         public ActionResult Edit([Bind(Include = "ID,userIDFK,rewardsIDFK,isClaimed")] UserClaim userClaim)
@@ -42,38 +50,12 @@ namespace TPOpenHouseAPI.Controllers
             {
                 db.Entry(userClaim).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json("Edit claim successful!");
             }
-            ViewBag.rewardsIDFK = new SelectList(db.Rewards, "ID", "rewardName", userClaim.rewardsIDFK);
-            ViewBag.userIDFK = new SelectList(db.Users, "userID", "userName", userClaim.userIDFK);
-            return View(userClaim);
+            return Json("Unable to edit claim!");
         }
 
-        // GET: UserClaims/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UserClaim userClaim = db.UserClaims.Find(id);
-            if (userClaim == null)
-            {
-                return HttpNotFound();
-            }
-            return View(userClaim);
-        }
-
-        // POST: UserClaims/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            UserClaim userClaim = db.UserClaims.Find(id);
-            db.UserClaims.Remove(userClaim);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        
 
         protected override void Dispose(bool disposing)
         {
